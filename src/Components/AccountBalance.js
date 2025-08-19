@@ -1,6 +1,6 @@
 // src/Components/AccountBalance.js
 import React, { useMemo, useState } from "react";
-import { Dropdown, Table, Form, ButtonGroup } from "react-bootstrap";
+import { Dropdown, Table, Form, DropdownButton } from "react-bootstrap";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
@@ -8,7 +8,7 @@ import "jspdf-autotable";
 import batchData from "../assests/Data/batchData.json";
 import vendorData from "../assests/Data/vendorData.json";
 
-// Mask account number
+// --- Mask account number ---
 function maskAccountNumber(accNo = "") {
   if (!accNo) return "";
   const s = String(accNo);
@@ -16,7 +16,7 @@ function maskAccountNumber(accNo = "") {
   return s.slice(0, 4) + "****" + s.slice(-4);
 }
 
-// Expand batch into transactions
+// --- Expand batch into transactions ---
 function expandBatch(batch, isVendor = false) {
   if (!batch || !batch.transactions) return [];
   const batchName = isVendor ? "Vendor Payments" : "Employee Payroll";
@@ -39,26 +39,15 @@ function expandBatch(batch, isVendor = false) {
     });
 }
 
-// Convert dd-MM-yyyy to JS Date
+// --- Date helpers ---
 function parseDDMMYYYY(str) {
   const [day, month, year] = str.split("-");
   const date = new Date(year, month - 1, day);
-  date.setHours(0, 0, 0, 0); // normalize to midnight
+  date.setHours(0, 0, 0, 0);
   return date;
 }
-
-// Convert JS Date to dd-MM-yyyy
-function formatDDMMYYYY(date) {
-  const d = String(date.getDate()).padStart(2, "0");
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const y = date.getFullYear();
-  return `${d}-${m}-${y}`;
-}
-
-// Get only date part from "dd-MM-yyyy HH:mm" string
 function txnDateOnly(txnDateStr) {
-  const datePart = txnDateStr.split(" ")[0]; // "dd-MM-yyyy"
-  return parseDDMMYYYY(datePart);
+  return parseDDMMYYYY(txnDateStr.split(" ")[0]); // only dd-MM-yyyy
 }
 
 export default function AccountBalance() {
@@ -77,6 +66,7 @@ export default function AccountBalance() {
       transactions: [],
     };
 
+  // --- Enriched transactions ---
   const enrichedTxns = useMemo(() => {
     let running = selectedAccount.openingBalance;
 
@@ -90,7 +80,7 @@ export default function AccountBalance() {
       });
   }, [allAccounts, selectedAccount]);
 
-  // --- FILTERING ---
+  // --- Filtering ---
   const filteredTxns = useMemo(() => {
     return enrichedTxns.filter((txn) => {
       if (filterMethod !== "All" && txn.method !== filterMethod) return false;
@@ -109,10 +99,44 @@ export default function AccountBalance() {
       ? enrichedTxns[enrichedTxns.length - 1].runningBalance
       : selectedAccount.openingBalance;
 
-  // Export functions (same as before)
-  const exportExcel = () => { /* ... */ };
-  const exportPDF = () => { /* ... */ };
-  const exportJSON = () => { /* ... */ };
+  // --- Export Functions ---
+  const exportExcel = () => {
+    const ws = XLSX.utils.json_to_sheet(filteredTxns);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Transactions");
+    XLSX.writeFile(wb, "transactions.xlsx");
+  };
+
+  const exportPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Transaction History", 14, 15);
+    doc.autoTable({
+      head: [["Batch ID", "Batch Name", "Txn ID", "Date", "Counterparty", "Amount", "Status", "Balance"]],
+      body: filteredTxns.map((txn) => [
+        txn.batchId,
+        txn.batchName,
+        txn.id,
+        txn.date,
+        txn.toAccountDisplay,
+        txn.amountNumber,
+        txn.status,
+        txn.runningBalance,
+      ]),
+      startY: 20,
+    });
+    doc.save("transactions.pdf");
+  };
+
+  const exportJSON = () => {
+    const blob = new Blob([JSON.stringify(filteredTxns, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "transactions.json";
+    a.click();
+  };
 
   return (
     <div className="container py-4">
@@ -147,43 +171,56 @@ export default function AccountBalance() {
         </div>
       </div>
 
-      {/* Filters + Table */}
+      {/* Filters + Export Dropdown */}
       <div className="card shadow-sm">
         <div className="card-header d-flex justify-content-between align-items-center flex-wrap">
           <span className="fw-bold">Transaction History</span>
-          <div className="d-flex flex-column align-items-start gap-2">
-            <Form.Select
-              size="sm"
-              value={filterMethod}
-              onChange={(e) => setFilterMethod(e.target.value)}
-              style={{ width: "160px" }}
-            >
-              <option value="All">All Methods</option>
-              <option value="NEFT">NEFT</option>
-              <option value="RTGS">RTGS</option>
-              <option value="IMPS">IMPS</option>
-              <option value="AUTO">AUTO</option>
-            </Form.Select>
 
-            {/* Plain input for date in dd-MM-yyyy */}
-            <input
-              type="text"
-              placeholder="From Date (dd-MM-yyyy)"
-              className="form-control form-control-sm w-100"
-              value={fromDate}
-              onChange={(e) => setFromDate(e.target.value)}
-            />
-
-            <input
-              type="text"
-              placeholder="To Date (dd-MM-yyyy)"
-              className="form-control form-control-sm w-100"
-              value={toDate}
-              onChange={(e) => setToDate(e.target.value)}
-            />
-          </div>
+          <DropdownButton
+            size="sm"
+            variant="primary"
+            title="Download"
+            id="dropdown-download"
+            align="end"
+          >
+            <Dropdown.Item onClick={exportExcel}>Export as Excel</Dropdown.Item>
+            <Dropdown.Item onClick={exportPDF}>Export as PDF</Dropdown.Item>
+            <Dropdown.Item onClick={exportJSON}>Export as JSON</Dropdown.Item>
+          </DropdownButton>
         </div>
 
+        {/* Filters */}
+        <div className="p-3 d-flex flex-column flex-md-row gap-2">
+          <Form.Select
+            size="sm"
+            value={filterMethod}
+            onChange={(e) => setFilterMethod(e.target.value)}
+            style={{ width: "160px" }}
+          >
+            <option value="All">All Methods</option>
+            <option value="NEFT">NEFT</option>
+            <option value="RTGS">RTGS</option>
+            <option value="IMPS">IMPS</option>
+            <option value="AUTO">AUTO</option>
+          </Form.Select>
+
+          <input
+            type="text"
+            placeholder="From Date (dd-MM-yyyy)"
+            className="form-control form-control-sm"
+            value={fromDate}
+            onChange={(e) => setFromDate(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="To Date (dd-MM-yyyy)"
+            className="form-control form-control-sm"
+            value={toDate}
+            onChange={(e) => setToDate(e.target.value)}
+          />
+        </div>
+
+        {/* Table */}
         <div className="card-body p-0">
           <Table bordered responsive className="mb-0 align-middle">
             <thead className="table-light">
