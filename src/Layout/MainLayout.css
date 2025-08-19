@@ -1,0 +1,9 @@
+.scrollPage {
+    overflow-y: auto;   /* vertical scroll */
+    overflow-x: hidden; /* block horizontal scroll */
+    /* position:static; */
+    /* width:100%; */
+  }
+body{
+  padding-bottom: 60px;
+}

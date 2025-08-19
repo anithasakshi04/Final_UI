@@ -1,0 +1,303 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    overflow-x: hidden;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 200px;
+    height: 100vh;
+    background: #1976d2;
+    color: white;
+    position: fixed;
+    top: 60px; /* push below header */
+    left: 0;
+    padding-top: 20px;
+    transition: transform 0.3s ease;
+    z-index: 900;
+  }
+  .sidebar button {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: white;
+    color: #1976d2;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .sidebar button:hover {
+    background: #1565c0;
+    color: white;
+  }
+  
+  /* Hamburger Menu for Mobile */
+  .menu-toggle {
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  /* Header */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;  /* cover full width */
+    height: 60px;
+    background: #64b5f6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: white;
+    z-index: 1000; /* ensure header stays above */
+  }
+  .header-left span {
+    margin-right: 20px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+.header-right button {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s ease;
+  }
+  
+  .login-btn {
+    background: #4caf50; /* green */
+    color: white;
+  }
+  
+  .login-btn:hover {
+    background: #388e3c;
+  }
+  
+  .logout-btn {
+    background: #e53935; /* red */
+    color: white;
+  }
+  
+  .logout-btn:hover {
+    background: #c62828;
+  }
+  
+  /* Content */
+  .content {
+    margin-left: 200px;
+    margin-top: 60px; /* push below header */
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  
+  /* Buttons */
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .action-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    flex: 1;
+    min-width: 120px;
+  }
+  .approve {
+    background: #4caf50;
+    color: white;
+  }
+  .export {
+    background: #2196f3;
+    color: white;
+  }
+  .approve:hover {
+    background: #388e3c;
+  }
+  .export:hover {
+    background: #1976d2;
+  }
+  
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background: #1976d2;
+    color: white;
+  }
+  tr:hover {
+    background: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  /* Batch Details */
+  .batch-detail {
+    display: none;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  .progress {
+    display: flex;
+    justify-content: space-between; /* Equal spacing */
+    margin-bottom: 20px;
+    align-items: center; /* Keep all steps vertically aligned */
+    flex-wrap: nowrap; /* Prevent wrapping to the next line */
+    overflow-x: auto; /* Allow scrolling on smaller screens */
+    scrollbar-width: none; /* Hide scrollbar (Firefox) */
+  }
+  
+  
+  
+  .step {
+    flex: 0 0 auto; /* Prevent shrinking */
+    min-width: 120px; /* Keep consistent width */
+    text-align: center;
+    padding: 10px;
+    border-bottom: 3px solid #ccc;
+    margin: 0 10px; /* Space between steps */
+    white-space: nowrap; /* Prevent text breaking */
+    transition: all 0.3s ease;
+  }
+  
+  .step:hover {
+    color: #4caf50;
+    cursor: pointer;
+  }
+  
+  .active {
+    border-bottom: 3px solid #4caf50;
+    font-weight: bold;
+    color: #4caf50;
+  }
+  
+  .batch-info {
+    margin-bottom: 20px;
+  }
+  .batch-info div {
+    margin: 6px 0;
+  }
+  .batch-summary {
+    margin-bottom: 20px;
+  }
+  .batch-summary div {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  .batch-actions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .batch-actions button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    flex: 1;
+    min-width: 120px;
+  }
+  .approve-batch {
+    background: #4caf50;
+    color: white;
+  }
+  .reject-batch {
+    background: #f44336;
+    color: white;
+  }
+  .approve-batch:hover {
+    background: #388e3c;
+  }
+  .reject-batch:hover {
+    background: #c62828;
+  }
+  
+  .back-btn {
+    margin-bottom: 15px;
+    background: #1976d2;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .back-btn:hover {
+    background: #0d47a1;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(-200px);
+    }
+    .sidebar.active {
+      transform: translateX(0);
+    }
+    .content {
+      margin-left: 0;
+    }
+    .menu-toggle {
+      display: block;
+    }
+    .header {
+      padding: 10px;
+    }
+    .action-buttons {
+      flex-direction: column;
+    }
+    table {
+      font-size: 14px;
+    }
+    th, td {
+      padding: 8px;
+    }
+    .progress .step {
+      flex: 0 0 100%;
+      margin: 5px 0;
+    }
+    .batch-actions {
+      flex-direction: column;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    table {
+      font-size: 12px;
+    }
+    .batch-info, .batch-summary {
+      font-size: 14px;
+    }
+    .batch-actions button {
+      padding: 10px;
+    }
+  }
+  

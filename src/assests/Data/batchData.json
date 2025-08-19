@@ -1,0 +1,81 @@
+[
+    {
+      "accountNo": "1233456789790",
+      "type": "Savings",
+      "openingBalance": 300000,
+      "transactions": [
+        {
+          "id": "JUN-SAL-001",
+          "date": "24-07-2025 10:00",
+          "toAccount": "Employee1",
+          "amount": -18000,
+          "method": "AUTO",
+          "status": "Approved",
+          "description": "Salary payment for Employee1",
+          "department": "finance",
+          "joiningYear": "2024",
+          "location": "chennai"
+        },
+        {
+          "id": "JUN-SAL-002",
+          "date": "24-07-2025 10:05",
+          "toAccount": "Employee2",
+          "amount": -2500,
+          "method": "AUTO",
+          "status": "Approved",
+          "description": "Salary payment for Employee2",
+          "department": "finance",
+          "joiningYear": "2024",
+          "location": "bangalore"
+        },
+        {
+          "id": "JUL-SAL-003",
+          "date": "24-07-2025 10:10",
+          "toAccount": "Employee3",
+          "amount": -22000,
+          "method": "AUTO",
+          "status": "Approved",
+          "description": "Salary payment for Employee3",
+          "department": "it",
+          "joiningYear": "2025",
+          "location": "chennai"
+        },
+        {
+          "id": "JUL-SAL-004",
+          "date": "24-07-2025 10:15",
+          "toAccount": "Employee4",
+          "amount": -40000,
+          "method": "AUTO",
+          "status": "Approved",
+          "description": "Salary payment for Employee4",
+          "department": "hr",
+          "joiningYear": "2024",
+          "location": "bangalore"
+        },
+        {
+          "id": "AUG-SAL-005",
+          "date": "24-07-2025 10:20",
+          "toAccount": "Employee5",
+          "amount": -15000,
+          "method": "AUTO",
+          "status": "Approved",
+          "description": "Salary payment for Employee5",
+          "department": "it",
+          "joiningYear": "2025",
+          "location": "bangalore"
+        },
+        {
+          "id": "AUG-SAL-006",
+          "date": "24-07-2025 10:25",
+          "toAccount": "Employee6",
+          "amount": -12000,
+          "method": "NEFT",
+          "status": "Pending",
+          "description": "Salary payment for Employee6",
+          "department": "finance",
+          "joiningYear": "2024",
+          "location": "chennai"
+        }
+      ]
+    }
+  ]

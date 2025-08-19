@@ -1,0 +1,41 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* Reset & Base Styles */ * { margin: 0; padding: 0; box-sizing: border-box; } body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #e6f2ff; /* Light blue background */ color: #333; min-height: 100vh; } .app-container { display: flex; flex-direction: column; min-height: 100vh; } /* Header */ .header { display: flex; justify-content: space-between; align-items: center; background: #0078d4; /* Blue header */ color: white; padding: 1rem 2rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; } .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem; font-weight: bold; color: white; } .logo-img { width: 40px; height: 40px; } .nav-links { display: flex; gap: 1.5rem; } .nav-link { color: white; text-decoration: none; font-size: 0.9rem; } .nav-link:hover { text-decoration: underline; } /* Main Content */ .main-content { display: flex; flex: 1; padding: 4rem 2rem; gap: 2rem; max-width: 1200px; margin: 0 auto; } .left-panel { flex: 1; padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); color: #333; } .left-panel h1 { font-size: 2.5rem; margin-bottom: 1rem; line-height: 1.2; color: #0078d4; } .left-panel p { font-size: 1rem; line-height: 1.6; margin-bottom: 2rem; color: #666; } .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem; } .value-card { padding: 1rem; border: 1px solid #e0e0e0; border-radius: 8px; background: #f9f9f9; } .icon { font-size: 1.5rem; margin-bottom: 0.5rem; color: #0078d4; } .value-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: #333; } .value-card p { font-size: 0.95rem; line-height: 1.5; color: #666; } .signup-link { margin-top: 2rem; font-size: 0.9rem; color: #666; } .signup-link button { color: #0078d4; font-weight: 500; background: none; border: none; cursor: pointer; text-decoration: underline; padding: 0; } .signup-link button:hover { text-decoration: none; } /* Right Panel */ .right-panel { flex: 1; display: flex; justify-content: center; align-items: center; } .login-card { width: 100%; max-width: 400px; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); border: 1px solid #e0e0e0; } .login-card h2 { text-align: center; margin-bottom: 1.5rem; color: #333; font-size: 1.2rem; } .login-options { margin-bottom: 1.5rem; } .login-options label { display: block; margin-bottom: 1rem; cursor: pointer; font-size: 0.95rem; color: #333; } .login-options input[type="radio"] { margin-right: 0.5rem; } .login-form { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee; } .form-group { margin-bottom: 1rem; } .form-group label { display: block; font-size: 0.9rem; color: #666; margin-bottom: 0.5rem; } .form-group input { width: 100%; padding: 0.7rem; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95rem; box-sizing: border-box; } .form-group input:focus { outline: none; border-color: #0078d4; box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2); } .submit-btn { width: 100%; padding: 0.8rem; background-color: #2e7d32; /* Green like in the image */ color: white; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; margin-top: 0.5rem; } .submit-btn:hover { background-color: #1b5e20; } /* Responsive Design */ @media (max-width: 900px) { .main-content { flex-direction: column; } .left-panel, .right-panel { width: 100%; padding: 1.5rem; } }
