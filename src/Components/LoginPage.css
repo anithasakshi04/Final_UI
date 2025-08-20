@@ -1,0 +1,561 @@
+/* General page */
+
+.login-container {
+
+  height: 100vh;
+
+  background-size: cover;
+
+  background-position: center;
+
+  display: flex;
+
+  flex-direction: column;
+
+  font-family: "Segoe UI", sans-serif;
+
+}
+
+
+
+/* Header */
+
+.header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 15px 40px;
+
+  background: rgba(255, 255, 255, 0.7);
+
+}
+
+
+
+.header .logo {
+
+  font-size: 20px;
+
+  font-weight: bold;
+
+  color: #006fba; /* Standard Chartered Blue */
+
+}
+
+
+
+.header nav a {
+
+  margin-left: 20px;
+
+  text-decoration: none;
+
+  color: #006fba;
+
+  font-weight: 500;
+
+}
+
+
+
+.header nav a:hover {
+
+  color: #00a86b; /* Standard Chartered Green */
+
+}
+
+
+
+/* Main content */
+
+.main-content {
+
+  display: flex;
+
+  flex: 1;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 50px;
+
+}
+
+
+
+/* Welcome Section */
+
+.welcome-section {
+
+  max-width: 45%;
+
+  color: white;
+
+}
+
+
+
+.welcome-section h1 {
+
+  font-size: 32px;
+
+  font-weight: bold;
+
+  margin-bottom: 15px;
+
+}
+
+
+
+.welcome-section p {
+
+  font-size: 16px;
+
+  margin-bottom: 25px;
+
+}
+
+
+
+.mottos {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+
+}
+
+
+
+.motto-card {
+
+  background: rgba(255, 255, 255, 0.15);
+
+  padding: 12px 18px;
+
+  border-radius: 12px;
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+}
+
+
+
+/* Login Box */
+
+.login-box {
+
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 15px;
+
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+
+  width: 300px;
+
+}
+
+
+
+.login-box h2 {
+
+  text-align: center;
+
+  margin-bottom: 20px;
+
+  color: #006fba;
+
+}
+
+
+
+.radio-options {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-bottom: 20px;
+
+  font-size: 14px;
+
+}
+
+
+
+input[type="text"],
+
+input[type="password"],
+
+input[type="email"] {
+
+  width: 100%;
+
+  padding: 12px;
+
+  margin-bottom: 15px;
+
+  border-radius: 8px;
+
+  border: 1px solid #ccc;
+
+}
+
+
+
+.password-container {
+
+  position: relative;
+
+}
+
+
+
+.password-container input {
+
+  width: 100%;
+
+}
+
+
+
+.toggle-password {
+
+  position: absolute;
+
+  right: 12px;
+
+  top: 12px;
+
+  cursor: pointer;
+
+  color: gray;
+
+}
+
+
+
+/* Login button */
+
+.login-btn {
+
+  width: 100%;
+
+  padding: 12px;
+
+  background: linear-gradient(90deg, #006fba, #00a86b);
+
+  border: none;
+
+  border-radius: 8px;
+
+  color: white;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+
+}
+
+
+
+.login-btn:hover {
+
+  background: linear-gradient(90deg, #005999, #008a55);
+
+}
+
+/* Container to center and contain payroll form */
+.payroll-container {
+  margin-left: 200px; /* Match MainLayout sidebar width */
+  padding: 80px 20px 80px; /* Space for fixed header and footer */
+  background-color: #f5f5f5; /* Match main layout background */
+  min-height: calc(100vh - 140px); /* Full viewport height less header/footer */
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+/* Inner wrapper for limited max width */
+.payroll-inner {
+  max-width: 1000px;
+  width: 100%;
+  background: #fff;
+  padding: 20px 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Instruction Section improvements */
+.instruction-section {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px 30px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.instruction-section h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  border-bottom: 2px solid #0473EA;
+  padding-bottom: 8px;
+}
+
+/* Form groups layout */
+.instruction-form {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.left-group,
+.right-group {
+  flex: 1;
+  min-width: 260px;
+}
+
+/* Labels */
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* Select, input and button styles */
+.form-group select,
+.form-group input[type="date"],
+.currency-btn,
+.upload-btn {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.currency-btn {
+  cursor: default;
+  background-color: #e7ecf8;
+  color: #484d64;
+  font-weight: 600;
+  border: 1px solid #aab2c8;
+}
+
+.upload-btn {
+  background-color: #0473EA;
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: not-allowed;
+  margin-top: 30px;
+  opacity: 0.6;
+}
+
+/* Payment Table Styles */
+.payment-table-section {
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px 30px 30px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.payment-table-section h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  border-bottom: 2px solid #0473EA;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+
+.batch-selection {
+  margin-bottom: 20px;
+}
+
+.batch-selection label {
+  font-size: 14px;
+  margin-right: 12px;
+  font-weight: 600;
+}
+
+.batch-selection select {
+  padding: 7px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* Table Layout */
+.payment-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.payment-table th,
+.payment-table td {
+  border: 1px solid #ccc;
+  padding: 12px 8px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.payment-table th {
+  background-color: #0473EA;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* Inputs and selects in table */
+.payment-table input[type="text"],
+.payment-table input[type="number"],
+.payment-table select {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Action cell with delete button */
+.action-cell {
+  width: 40px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.delete-btn {
+  background-color: #E74C3C;
+  border: none;
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+  background-color: #C0392B;
+}
+
+/* Add Row Button */
+.add-row-btn {
+  background-color: #0473EA;
+  border: none;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 25px;
+  transition: background-color 0.3s ease;
+}
+
+.add-row-btn:hover {
+  background-color: #025bb5;
+}
+
+/* Total Amount display */
+.total-amount {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  text-align: right;
+  margin-bottom: 25px;
+}
+
+/* Submit Buttons Container */
+.submit-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+/* Save Draft and Submit buttons */
+.save-draft-btn,
+.submit-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.save-draft-btn {
+  background-color: #6f42c1;
+  color: white;
+}
+
+.save-draft-btn:hover {
+  background-color: #592ea9;
+}
+
+.submit-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #1e7e34;
+}
+
+.submit-btn:disabled {
+  background-color: #a4d3a2;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .instruction-form {
+    flex-direction: column;
+  }
+
+  .left-group,
+  .right-group {
+    min-width: 100%;
+  }
+
+  .payroll-container {
+    margin-left: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
