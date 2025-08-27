@@ -519,14 +519,14 @@ input[type="email"] {
   transition: background-color 0.3s ease;
 }
 
-.save-draft-btn {
+/* .save-draft-btn {
   background-color: #6f42c1;
   color: white;
 }
 
 .save-draft-btn:hover {
   background-color: #592ea9;
-}
+} */
 
 .submit-btn {
   background-color: #28a745;

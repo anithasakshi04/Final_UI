@@ -11,14 +11,14 @@ function BatchDetail({ batchId, goBack }) {
         ← Back
       </button>
 
-      <div className="progress">
+      <div className="progress" style={{color:"black"}} >
         <div className="step active">Batched</div>
         <div className="step active">Approver 1</div>
         <div className="step">Approver 2</div>
         <div className="step">Released to Bank</div>
       </div>
 
-      <div className="batch-info">
+      <div className="batch-info" style={{color:"black"}}>
         <div>
           <b>Batch ID:</b> {batchId}
         </div>
@@ -39,7 +39,7 @@ function BatchDetail({ batchId, goBack }) {
         </div>
       </div>
 
-      <div className="batch-summary">
+      <div className="batch-summary" style={{color:"black"}}>
         <div>Payment 1 - ₹18000</div>
         <div>Payment 2 - ₹2500</div>
         <div>Payment 3 - ₹22000</div>

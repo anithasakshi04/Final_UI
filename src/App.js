@@ -8,14 +8,12 @@ import { TransactionsProvider } from './contexts/TransactionContext';
 import { Transactions } from './Components/Transactions';
 import BatchMainContent from './Components/BatchMainContent';
 import PayrollFormApp from './Components/PayrollFormApp';
-// import Login from "./Components/Login";
 import LoginPage from "./Components/LoginPage";
 import { useState } from "react";
 
 
 function App() {
   const loggedInUserId=1;
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <TransactionsProvider>
   <Router>

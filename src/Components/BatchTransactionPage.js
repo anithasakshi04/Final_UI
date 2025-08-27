@@ -234,7 +234,7 @@ const downloadPDF = () => {
               />{" "}
               Single Transaction
             </label>
-            <label>
+            {/* <label>
               <input
                 type="radio"
                 name="mode"
@@ -243,7 +243,7 @@ const downloadPDF = () => {
                 onChange={() => setMode("multiple")}
               />{" "}
               Multiple Transactions
-            </label>
+            </label> */}
           </div>
 
           {/* Payment Summary */}

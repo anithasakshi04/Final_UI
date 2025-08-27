@@ -9,7 +9,7 @@ function BatchList({ onSelectBatch }) {
         <button className="export">Export List</button>
       </div>
 
-      <table>
+      <table style={{color:"black"}}>
         <thead>
           <tr>
             <th>Batch ID</th>

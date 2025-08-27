@@ -171,7 +171,7 @@ export default function PayrollForm({
         </div>
 
         <div className="submit-buttons">
-          <button className="save-draft-btn">Save as Draft</button>
+          <button className=" save-draft-btn">Save as Draft</button>
           <button className="submit-btn" disabled>Submit for Processing</button>
         </div>
       </div>
