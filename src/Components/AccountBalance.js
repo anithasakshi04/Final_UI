@@ -1,10 +1,11 @@
 // src/Components/AccountBalance.js
 import React, { useMemo, useState } from "react";
-import { Dropdown, Table, Form, DropdownButton } from "react-bootstrap";
+import { Dropdown, Table, Form, DropdownButton, ButtonGroup } from "react-bootstrap";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-
+// import Dropdown from "react-bootstrap/Dropdown";
+// import DropdownButton from "react-bootstrap/DropdownButton";
 import batchData from "../assests/Data/batchData.json";
 import vendorData from "../assests/Data/vendorData.json";
 
@@ -55,6 +56,7 @@ export default function AccountBalance() {
   const [filterMethod, setFilterMethod] = useState("All");
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
+  const [currency, setCurrency] = useState("INR"); // --- NEW state
 
   const allAccounts = useMemo(() => [...batchData, ...vendorData], []);
 
@@ -65,6 +67,31 @@ export default function AccountBalance() {
       openingBalance: 0,
       transactions: [],
     };
+
+  // --- Currency Conversion Rates ---
+  const conversionRates = {
+    INR: { rate: 1, symbol: "₹" },
+    USD: { rate: 0.012, symbol: "$" }, // Example: 1 INR ≈ 0.012 USD
+    EUR: { rate: 0.011, symbol: "€" }, // Example: 1 INR ≈ 0.011 EUR
+  };
+
+// --- Always format in INR as base currency
+const formatINR = (amount) => {
+  return `₹ ${amount.toLocaleString("en-IN", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+};
+
+// --- Get equivalent in selected currency
+const getEquivalent = (amount) => {
+  const { rate, symbol } = conversionRates[currency];
+  if (currency === "INR") return ""; // Don't show if INR selected
+  return `${symbol} ${(amount * rate).toLocaleString("en-IN", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+};
 
   // --- Enriched transactions ---
   const enrichedTxns = useMemo(() => {
@@ -142,51 +169,83 @@ export default function AccountBalance() {
     <div className="container py-4">
       {/* Account Info */}
       <div className="card mb-4 shadow-sm">
-        <div className="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
-          <div>
-            <Form.Label className="fw-bold mb-2">Select Account</Form.Label>
-            <Dropdown>
-              <Dropdown.Toggle variant="outline-success" id="dropdown-account">
-                {maskAccountNumber(selectedAccount.accountNo)} ({selectedAccount.type})
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {allAccounts.map((acc, idx) => (
-                  <Dropdown.Item
-                    key={acc.accountNo}
-                    onClick={() => setSelected(idx)}
-                    active={selected === idx}
-                  >
-                    {maskAccountNumber(acc.accountNo)} ({acc.type})
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-          <div className="mt-3 mt-md-0 text-md-end">
-            <div className="fw-bold">Account Number: {selectedAccount.accountNo}</div>
-            <div className="h5 fw-bold text-success">
-              Current Balance: ₹ {currentBalance.toLocaleString("en-IN")}
-            </div>
-          </div>
-        </div>
-      </div>
+  <div className="card-body d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+    
+    {/* LEFT SIDE */}
+    <div>
+      <Form.Label className="fw-bold mb-2">Select Account</Form.Label>
+      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+        {/* Account Dropdown */}
+        <Dropdown>
+          <Dropdown.Toggle variant="outline-success" id="dropdown-account">
+            {maskAccountNumber(selectedAccount.accountNo)} ({selectedAccount.type})
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            {allAccounts.map((acc, idx) => (
+              <Dropdown.Item
+                key={acc.accountNo}
+                onClick={() => setSelected(idx)}
+                active={selected === idx}
+              >
+                {maskAccountNumber(acc.accountNo)} ({acc.type})
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
 
-      {/* Filters + Export Dropdown */}
+        {/* Currency Dropdown */}
+        <DropdownButton
+          size="sm"
+          variant="outline-secondary"
+          title={`Currency: ${currency}`}
+          id="dropdown-currency"
+          style={{ minWidth: "150px", textAlign: "center" }}
+        >
+          {Object.keys(conversionRates).map((cur) => (
+            <Dropdown.Item key={cur} onClick={() => setCurrency(cur)}>
+              {cur}
+            </Dropdown.Item>
+          ))}
+        </DropdownButton>
+      </div>
+    </div>
+
+    {/* RIGHT SIDE */}
+    <div className="mt-3 mt-md-0 text-md-end">
+      <div className="fw-bold">Account Number: {selectedAccount.accountNo}</div>
+      <div className="h5 fw-bold text-success">
+        Base Currency Balance: {formatINR(currentBalance)}
+        {currency !== "INR" && (
+          <span className="ms-3">
+            Currency Equivalent Balance: {getEquivalent(currentBalance)}
+          </span>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      {/* Filters + Export Dropdown + Currency Dropdown */}
       <div className="card shadow-sm">
         <div className="card-header d-flex justify-content-between align-items-center flex-wrap">
           <span className="fw-bold">Transaction History</span>
 
-          <DropdownButton
-            size="sm"
-            variant="primary"
-            title="Download"
-            id="dropdown-download"
-            align="end"
-          >
-            <Dropdown.Item onClick={exportExcel}>Export as Excel</Dropdown.Item>
-            <Dropdown.Item onClick={exportPDF}>Export as PDF</Dropdown.Item>
-            <Dropdown.Item onClick={exportJSON}>Export as JSON</Dropdown.Item>
-          </DropdownButton>
+          {/* <ButtonGroup> */}
+            
+
+            <DropdownButton
+              size="sm"
+              variant="primary"
+              title="Download"
+              id="dropdown-download"
+              align="end"
+            >
+              <Dropdown.Item onClick={exportExcel}>Export as Excel</Dropdown.Item>
+              <Dropdown.Item onClick={exportPDF}>Export as PDF</Dropdown.Item>
+              <Dropdown.Item onClick={exportJSON}>Export as JSON</Dropdown.Item>
+            </DropdownButton>
+          {/* </ButtonGroup> */}
         </div>
 
         {/* Filters */}
@@ -244,11 +303,9 @@ export default function AccountBalance() {
                     <td>{txn.id}</td>
                     <td>{txn.date}</td>
                     <td>{txn.toAccountDisplay}</td>
-                    <td className={txn.amountNumber < 0 ? "text-danger" : "text-success"}>
-                      {txn.amountNumber.toLocaleString("en-IN")}
-                    </td>
+                    <td>₹{txn.amountNumber}</td>
                     <td>{txn.status}</td>
-                    <td>₹ {txn.runningBalance.toLocaleString("en-IN")}</td>
+                    <td>₹ {txn.runningBalance}</td>
                   </tr>
                 ))
               ) : (
